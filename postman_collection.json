@@ -1,0 +1,97 @@
+{
+  "info": {
+    "name": "Flask OpenAI App",
+    "description": "Postman collection for testing the Flask OpenAI application.",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Root Endpoint",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "your_api_key_here"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": ["{{base_url}}"]
+        }
+      },
+      "response": [
+        {
+          "code": 200,
+          "body": "{\"response\": \"Hello, World!\"}"
+        }
+      ]
+    },
+    {
+      "name": "Chat Endpoint",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "your_api_key_here"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"content\": \"what is the capital of Lebanon\"}"
+        },
+        "url": {
+          "raw": "{{base_url}}/chat",
+          "host": ["{{base_url}}"],
+          "path": ["chat"]
+        }
+      },
+      "response": [
+        {
+          "code": 200,
+          "body": "{\"response\": \"what is the capital of Lebanon\", \"version\": \"0.1.0\"}"
+        }
+      ]
+    },
+    {
+      "name": "Generate Image Endpoint",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "your_api_key_here"
+          },
+          {
+            "key": "response-type",
+            "value": "base64"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"content\": \"A red elephant\"}"
+        },
+        "url": {
+          "raw": "{{base_url}}/generateImage",
+          "host": ["{{base_url}}"],
+          "path": ["generateImage"]
+        }
+      },
+      "response": [
+        {
+          "code": 200,
+          "body": "{\"base64\": \"4AAQSkZJRgABAQAAAQABAAD/2wCEAAUFBQoHC...\", \"version\": \"0.1.0\"}"
+        }
+      ]
+    }
+  ]
+}
