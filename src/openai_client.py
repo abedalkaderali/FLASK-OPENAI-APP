@@ -1,3 +1,4 @@
+from urllib import response
 import openai
 import requests
 import base64
@@ -11,21 +12,12 @@ class OpenAIClient:
         response = openai.Image.create(
             prompt=prompt,
             n=1,
-            size="1024x1024"
+            size="256x256",
+            response_format="b64_json"
         )
-        image_url = response['data'][0]['url']
+        return response['data'][0]
 
-        if response_type == 'base64':
-            image_data = self.convert_image_to_base64(image_url)
-            return {
-                "base64": image_data,
-                "version": "0.1.0"
-            }
-        else:
-            return {
-                "image_url": image_url,
-                "version": "0.1.0"
-            }
+
 
     def convert_image_to_base64(self, image_url):
         response = requests.get(image_url)
