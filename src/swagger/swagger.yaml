@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  title: Flask OpenAI API
+  version: 0.1.0
+  description: A Flask application that integrates with OpenAI's API for chat completions and image generation.
+servers:
+  - url: http://localhost:5000
+paths:
+  /:
+    get:
+      summary: Returns a simple greeting message
+      responses:
+        '200':
+          description: A simple greeting message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    example: Hello, World!
+  /chat:
+    post:
+      summary: Chat with OpenAI
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: what is the capital of Lebanon
+      responses:
+        '200':
+          description: Response from OpenAI chat completion
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    example: Beirut
+                  version:
+                    type: string
+                    example: 0.1.0
+  /generateImage:
+    post:
+      summary: Generate an image based on user input
+      parameters:
+        - in: header
+          name: response-type
+          required: true
+          schema:
+            type: string
+            enum: [base64, image]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: A red elephant
+      responses:
+        '200':
+          description: Image or base64 response from OpenAI
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  base64:
+                    type: string
+                    example: 4AAQSkZJRgABAQAAAQABAAD/2wCEAAUFBQoHC...
+                  version:
+                    type: string
+                    example: 0.1.0
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
