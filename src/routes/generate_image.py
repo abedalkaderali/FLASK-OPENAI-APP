@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify
 from src.openai_client import generate_image_response
 import os
+from src.auth import authenticate
 
 generate_image_bp = Blueprint('generate_image', __name__)
 
 @generate_image_bp.route('/generateImage', methods=['POST'])
+@authenticate
 def generate_image():
     api_key = os.getenv("API_KEY")
     response_type = request.headers.get('response-type')

@@ -10,7 +10,7 @@ class TestFlaskApp(unittest.TestCase):
     def setUp(self):
         self.app = create_app().test_client()
         self.app.testing = True
-        self.api_key = os.getenv("API_KEY")
+        self.api_key = os.getenv("X_API_KEY")
 
     def test_root_endpoint(self):
         response = self.app.get('/', headers={'x-api-key': self.api_key})

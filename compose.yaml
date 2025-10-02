@@ -1,0 +1,20 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-flask-api:latest
+    container_name: flask-api
+    environment:
+      # Flask Config
+      FLASK_ENV: production
+      # Beispiel für Secrets; nimm .env oder Docker Secrets, aber bitte nicht ins Repo pushen
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      # Eigene Settings
+      APP_LOG_LEVEL: INFO
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    # Für Dev kannst du den Code mounten. In Prod lässt du es zu.
+    # volumes:
+    #   - ./src:/app/src:ro

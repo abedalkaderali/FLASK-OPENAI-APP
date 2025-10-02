@@ -10,7 +10,7 @@ class ChatEndpointTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app().test_client()
         self.app.testing = True
-        self.api_key = os.getenv("API_KEY")
+        self.api_key = os.getenv("X_API_KEY")
 
     def test_chat_endpoint_success(self):
         response = self.app.post('/chat',
