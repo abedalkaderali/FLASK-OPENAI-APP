@@ -9,9 +9,10 @@ def authenticate(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         api_key = request.headers.get('x-api-key')
-        print("Received API key:", api_key) 
+        # print("Received API key:", api_key) 
         if api_key != API_KEY:
             return jsonify({"error": "Unauthorized"}), 401
         return f(*args, **kwargs)
     return decorated
 
+sddafsadf 4rtq34 w 514 og k;sldfdsaaaaaaaaaaaasdfsd
